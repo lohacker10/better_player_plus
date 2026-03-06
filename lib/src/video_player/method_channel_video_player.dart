@@ -274,6 +274,27 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
           case 'pipStop':
             return VideoEvent(eventType: VideoEventType.pipStop, key: key);
 
+          case 'videoResolutionChanged':
+            double width = 0;
+            double height = 0;
+
+            try {
+              if (map.containsKey('width')) {
+                final num widthNum = map['width'] as num;
+                width = widthNum.toDouble();
+              }
+              if (map.containsKey('height')) {
+                final num heightNum = map['height'] as num;
+                height = heightNum.toDouble();
+              }
+            } catch (exception) {
+              BetterPlayerUtils.log(exception.toString());
+            }
+
+            final Size size = Size(width, height);
+
+            return VideoEvent(eventType: VideoEventType.videoResolutionChanged, key: key, size: size);
+
           default:
             return VideoEvent(eventType: VideoEventType.unknown, key: key);
         }

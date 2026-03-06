@@ -45,6 +45,7 @@ import androidx.media3.common.Timeline
 import androidx.media3.common.TrackSelectionOverride
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.common.util.Util
+import androidx.media3.common.VideoSize
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
@@ -496,6 +497,20 @@ internal class BetterPlayer(
 
             override fun onPlayerError(error: PlaybackException) {
                 eventSink.error("VideoError", "Video player had error $error", "")
+            }
+
+            override fun onVideoSizeChanged(
+                videoSize: VideoSize
+            ) {
+                val width = videoSize.width
+                val height = videoSize.height
+                Log.d("RiverPlayer", "Video size changed: ${width}x${height}")
+        
+                val event: MutableMap<String, Any> = HashMap()
+                event["event"] = "videoResolutionChanged"
+                event["width"] = width
+                event["height"] = height
+                eventSink.success(event)
             }
         })
         val reply: MutableMap<String, Any> = HashMap()
