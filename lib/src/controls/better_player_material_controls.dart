@@ -11,6 +11,7 @@ import 'package:better_player_plus/src/video_player/video_player.dart';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BetterPlayerMaterialControls extends StatefulWidget {
   const BetterPlayerMaterialControls({
@@ -587,6 +588,6 @@ class _BetterPlayerMaterialControlsState extends BetterPlayerControlsState<Bette
       return ColoredBox(color: _controlsConfiguration.controlBarColor, child: _controlsConfiguration.loadingWidget);
     }
 
-    return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(_controlsConfiguration.loadingColor));
+    return LoadingAnimationWidget.staggeredDotsWave(color: _controlsConfiguration.loadingColor, size: 50);
   }
 }

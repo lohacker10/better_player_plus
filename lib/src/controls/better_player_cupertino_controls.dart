@@ -9,6 +9,7 @@ import 'package:better_player_plus/src/core/better_player_utils.dart';
 import 'package:better_player_plus/src/video_player/video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BetterPlayerCupertinoControls extends StatefulWidget {
   const BetterPlayerCupertinoControls({
@@ -593,7 +594,7 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
       return _controlsConfiguration.loadingWidget;
     }
 
-    return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(_controlsConfiguration.loadingColor));
+    return LoadingAnimationWidget.staggeredDotsWave(color: _controlsConfiguration.loadingColor, size: 50);
   }
 
   Widget _buildPipButton(
