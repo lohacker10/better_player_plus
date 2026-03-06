@@ -1099,11 +1099,12 @@ class BetterPlayerController {
       case VideoEventType.bufferingEnd:
         _postEvent(BetterPlayerEvent(BetterPlayerEventType.bufferingEnd));
       case VideoEventType.videoResolutionChanged:
-        final VideoPlayerValue? videoValue = videoPlayerController?.value;
         _postEvent(
           BetterPlayerEvent(
             BetterPlayerEventType.videoResolutionChanged,
-            parameters: <String, dynamic>{_sizeParameter: videoValue?.size},
+            parameters: <String, dynamic>{
+              _sizeParameter: event.size,
+            },
           ),
         );
       default:
